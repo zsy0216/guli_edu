@@ -18,6 +18,12 @@ import org.junit.Test;
 public class CodeGenerator {
 
     @Test
+    public void main() {
+        String projectPath = System.getProperty("user.dir");
+        System.out.println(projectPath);
+    }
+
+    @Test
     public void run() {
 
         // 1、创建代码生成器
