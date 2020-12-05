@@ -2,6 +2,7 @@ package com.tassel.edu.controller;
 
 import com.tassel.edu.entity.Teacher;
 import com.tassel.edu.service.TeacherService;
+import com.tassel.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,8 +34,8 @@ public class TeacherController {
      */
     @GetMapping("/teachers")
     @ApiOperation(value = "讲师列表信息")
-    public List<Teacher> listTeachers() {
-        return teacherService.list(null);
+    public R listTeachers() {
+        return R.ok().data("items", teacherService.list(null));
     }
 
     /**
@@ -45,10 +46,11 @@ public class TeacherController {
      */
     @DeleteMapping("/teacher/{id}")
     @ApiOperation(value = "逻辑删除讲师")
-    public boolean removeTeacher(@ApiParam(name = "id", value = "讲师ID", required = true)
-                                 @PathVariable String id) {
-        return teacherService.removeById(id);
+    public R removeTeacher(@ApiParam(name = "id", value = "讲师ID", required = true)
+                           @PathVariable String id) {
+        if (teacherService.removeById(id)) {
+            return R.ok();
+        }
+        return R.error();
     }
-
 }
-
