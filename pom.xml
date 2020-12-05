@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>guli_service</module>
+        <module>guli_common</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

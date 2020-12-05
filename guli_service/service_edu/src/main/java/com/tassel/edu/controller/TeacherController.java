@@ -2,6 +2,9 @@ package com.tassel.edu.controller;
 
 import com.tassel.edu.entity.Teacher;
 import com.tassel.edu.service.TeacherService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,6 +18,7 @@ import java.util.List;
  * @author ZSY
  * @since 2020-12-04
  */
+@Api(value = "讲师管理", tags = {"讲师管理"})
 @RestController
 @RequestMapping("/edu")
 public class TeacherController {
@@ -28,17 +32,21 @@ public class TeacherController {
      * @return 讲师列表信息
      */
     @GetMapping("/teachers")
+    @ApiOperation(value = "讲师列表信息")
     public List<Teacher> listTeachers() {
         return teacherService.list(null);
     }
 
     /**
      * 逻辑删除
+     *
      * @param id 要删除的讲师 id
      * @return 是否删除成功
      */
     @DeleteMapping("/teacher/{id}")
-    public boolean removeTeacher(@PathVariable String id) {
+    @ApiOperation(value = "逻辑删除讲师")
+    public boolean removeTeacher(@ApiParam(name = "id", value = "讲师ID", required = true)
+                                 @PathVariable String id) {
         return teacherService.removeById(id);
     }
 
