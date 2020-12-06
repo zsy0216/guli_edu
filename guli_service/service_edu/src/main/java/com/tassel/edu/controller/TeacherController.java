@@ -76,6 +76,7 @@ public class TeacherController {
 
         QueryWrapper<Teacher> wrapper = new QueryWrapper<>();
 
+        // 动态 SQL
         if (teacherQueryVo != null) {
             String name = teacherQueryVo.getName();
             Integer level = teacherQueryVo.getLevel();
@@ -104,5 +105,19 @@ public class TeacherController {
         // 数据 List
         List<Teacher> rows = teacherPage.getRecords();
         return R.ok().data("total", total).data("rows", rows);
+    }
+
+    /**
+     * 增加讲师记录
+     *
+     * @param teacher 讲师信息
+     * @return 是否成功
+     */
+    @PostMapping("/teacher")
+    public R saveTeacher(@RequestBody Teacher teacher) {
+        if (teacherService.save(teacher)) {
+            return R.ok();
+        }
+        return R.error();
     }
 }
