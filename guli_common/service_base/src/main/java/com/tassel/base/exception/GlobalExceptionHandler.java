@@ -1,6 +1,7 @@
 package com.tassel.base.exception;
 
 import com.tassel.utils.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date: 2020/12/6 16:59
  */
 @ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     /**
@@ -52,7 +54,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GuliException.class)
     @ResponseBody
     public R error(GuliException e) {
-        e.printStackTrace();
+//        e.printStackTrace();
+        log.error(e.getMessage());
         return R.error().code(e.getCode()).message(e.getMsg());
     }
 }

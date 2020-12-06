@@ -6,6 +6,8 @@
 
 ### 统一异常处理
 
+[GlobalExceptionHandler.java](/guli_common/service_base/src/main/java/com/tassel/base/exception/GlobalExceptionHandler.java)
+
 ```java
 /**
  * 统一异常处理：当出现指定的异常类型时，由此程序进行处理
@@ -64,6 +66,7 @@ public class GlobalExceptionHandler {
 #### 自定义异常
 
 注意：自定义异常需要自己手动抛出(throw)
+[GuliException.java](/guli_common/service_base/src/main/java/com/tassel/base/exception/GuliException.java)
 
 ```java
 
