@@ -1,11 +1,17 @@
 package com.tassel.edu.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tassel.edu.entity.Teacher;
+import com.tassel.edu.entity.vo.TeacherQueryVo;
 import com.tassel.edu.service.TeacherService;
 import com.tassel.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +26,7 @@ import java.util.List;
  * @since 2020-12-04
  */
 @Api(value = "讲师管理", tags = {"讲师管理"})
+@Slf4j
 @RestController
 @RequestMapping("/edu")
 public class TeacherController {
@@ -52,5 +59,50 @@ public class TeacherController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 分页查询讲师列表
+     *
+     * @param current 当前页码
+     * @param limit   每页记录数
+     * @return R
+     */
+    @GetMapping("/teachers/{current}/{limit}")
+    public R pageListTeachers(@PathVariable long current, @PathVariable long limit,
+                              TeacherQueryVo teacherQueryVo) {
+        log.info("当前参数值为：current: {}, limit: {}, teacherQueryVo: {}", current, limit, teacherQueryVo);
+        Page<Teacher> teacherPage = new Page<>(current, limit);
+
+        QueryWrapper<Teacher> wrapper = new QueryWrapper<>();
+
+        if (teacherQueryVo != null) {
+            String name = teacherQueryVo.getName();
+            Integer level = teacherQueryVo.getLevel();
+            String begin = teacherQueryVo.getBegin();
+            String end = teacherQueryVo.getEnd();
+            //判断条件值是否为空，如果不为空拼接条件
+            if (StringUtils.isNotEmpty(name)) {
+                //构建条件
+                wrapper.like("name", name);
+            }
+            if (ObjectUtils.isNotEmpty(level)) {
+                wrapper.eq("level", level);
+            }
+            if (StringUtils.isNotEmpty(begin)) {
+                wrapper.ge("gmt_create", begin);
+            }
+            if (StringUtils.isNotEmpty(end)) {
+                wrapper.le("gmt_create", end);
+            }
+        }
+
+        // 底层把分页所有数据封装到 teacherPage 对象里
+        teacherService.page(teacherPage, wrapper);
+        // 总记录数
+        long total = teacherPage.getTotal();
+        // 数据 List
+        List<Teacher> rows = teacherPage.getRecords();
+        return R.ok().data("total", total).data("rows", rows);
     }
 }
