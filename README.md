@@ -2,6 +2,8 @@
 
 学习地址：[Bilibili](https://www.bilibili.com/video/BV1dQ4y1A75e)
 
+[拾遗](/GETLOST.md)：个人知识点补充
+
 ## 技术路线
 
 ### 后端
@@ -14,7 +16,3 @@
 |              |               |                                                  |
 
 ### 前端
-
-
-### 拾遗
-- @RequestBody 主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)，而 Get 方式无请求体，所有使用该注解只能使用 POST 请求；
