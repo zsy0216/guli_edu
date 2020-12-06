@@ -2,7 +2,7 @@
 
 学习地址：[Bilibili](https://www.bilibili.com/video/BV1dQ4y1A75e)
 
-[拾遗](/GETLOST.md)：个人知识点补充
+[拾遗](/REGAINLOST.md)：个人知识点补充
 
 ## 技术路线
 
