@@ -51,7 +51,7 @@ public class TeacherController {
      * @param id 要删除的讲师 id
      * @return 是否删除成功
      */
-    @DeleteMapping("/teacher/{id}")
+    @DeleteMapping("/teachers/{id}")
     @ApiOperation(value = "逻辑删除讲师")
     public R removeTeacher(@ApiParam(name = "id", value = "讲师ID", required = true)
                            @PathVariable String id) {
@@ -113,9 +113,35 @@ public class TeacherController {
      * @param teacher 讲师信息
      * @return 是否成功
      */
-    @PostMapping("/teacher")
+    @PostMapping("/teachers")
     public R saveTeacher(@RequestBody Teacher teacher) {
         if (teacherService.save(teacher)) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    /**
+     * 根据 id 查询讲师信息
+     *
+     * @param id 要查询的讲师 id
+     * @return 查询出来的讲师
+     */
+    @GetMapping("/teachers/{id}")
+    public R queryTeacher(@PathVariable String id) {
+        Teacher teacher = teacherService.getById(id);
+        return R.ok().data("teacher", teacher);
+    }
+
+    /**
+     * 更新讲师信息
+     *
+     * @param teacher 要更新的讲师信息
+     * @return 是否成功
+     */
+    @PutMapping("/teachers")
+    public R updateTeacher(@RequestBody Teacher teacher) {
+        if (teacherService.updateById(teacher)) {
             return R.ok();
         }
         return R.error();
