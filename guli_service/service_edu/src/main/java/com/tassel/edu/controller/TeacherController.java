@@ -2,6 +2,7 @@ package com.tassel.edu.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tassel.base.exception.GuliException;
 import com.tassel.edu.entity.Teacher;
 import com.tassel.edu.entity.vo.TeacherQueryVo;
 import com.tassel.edu.service.TeacherService;
@@ -129,6 +130,11 @@ public class TeacherController {
      */
     @GetMapping("/teachers/{id}")
     public R queryTeacher(@PathVariable String id) {
+        try {
+            int a = 10 / 0;
+        } catch (Exception e) {
+            throw new GuliException(20001, "执行了自定义异常处理");
+        }
         Teacher teacher = teacherService.getById(id);
         return R.ok().data("teacher", teacher);
     }
