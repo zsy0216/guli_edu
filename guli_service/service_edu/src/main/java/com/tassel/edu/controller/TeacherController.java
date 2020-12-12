@@ -64,7 +64,7 @@ public class TeacherController {
     }
 
     /**
-     * 分页查询讲师列表
+     * 分页条件查询讲师列表
      *
      * @param current 当前页码
      * @param limit   每页记录数
