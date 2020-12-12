@@ -28,6 +28,7 @@ import java.util.List;
  */
 @Api(value = "讲师管理", tags = {"讲师管理"})
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/edu")
 public class TeacherController {
