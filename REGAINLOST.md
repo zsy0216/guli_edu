@@ -78,3 +78,9 @@ public class GuliException extends RuntimeException {
     private String msg;
 }
 ```
+
+### Vue 
+- v-bind 单向绑定可以简写为 `:`;
+- v-on 事件绑定可以简写为 `@`;
+
+- v-model 数据双向绑定;
