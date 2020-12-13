@@ -92,7 +92,7 @@ export default {
     return {
       listLoading: true, // 是否显示loading信息
       page: 1, // 页码
-      limit: 3, // 每页记录数
+      limit: 5, // 每页记录数
       total: 0, // 总记录数
       list: [], // 查询之后返回的数据集合
       teacherQueryVo: {} // 条件对象

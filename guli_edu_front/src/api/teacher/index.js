@@ -17,5 +17,14 @@ export default {
       url: `/edu/teachers/${id}`,
       method: 'delete'
     })
+  },
+
+  // 2. add讲师
+  addTeacher(teacher) {
+    return request({
+      url: `/edu/teachers/`,
+      method: 'post',
+      data: teacher // post json
+    })
   }
 }

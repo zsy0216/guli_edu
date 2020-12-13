@@ -100,6 +100,8 @@ public class TeacherController {
             }
         }
 
+        wrapper.orderByDesc("gmt_create");
+
         // 底层把分页所有数据封装到 teacherPage 对象里
         teacherService.page(teacherPage, wrapper);
         // 总记录数

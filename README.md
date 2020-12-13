@@ -4,7 +4,7 @@
 
 [拾遗](/REGAINLOST.md)：个人知识点补充
 
-前端代码：/guli_edu/guli_service/service_edu/src/main/resource/guli_edu_front
+前端代码：[/guli_edu_front](/guli_edu_front)
 
 ## 技术路线
 
