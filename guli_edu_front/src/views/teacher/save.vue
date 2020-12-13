@@ -52,15 +52,45 @@ export default {
     }
   },
   created() {
-
+    // 判断vue路由中是否有参数名为id的参数
+    if (this.$route.params && this.$route.params.id) {
+      const id = this.$route.params.id;
+      this.getInfo(id);
+    }
   },
   methods: {
+    getInfo(id) {
+      teacher.getTeacher(id)
+        .then(response => {
+          this.teacher = response.data.teacher;
+        })
+    },
     saveOrUpdate() {
+      // 判断是修改还是添加(修改时会回显id)
+      if (this.teacher.id) {
+        this.update();
+      } else {
+        this.save();
+      }
+    },
+    save() {
       teacher.addTeacher(this.teacher)
         .then(response => {
           this.$message({
             type: 'success',
             message: '添加成功!'
+          });
+          // 路由跳转-返回列表页面
+          this.$router.push({path: '/teacher/table'})
+        });
+      // element-ui 已经封装过catch
+    },
+    update() {
+      teacher.updateTeacher(this.teacher)
+        .then(response => {
+          this.$message({
+            type: 'success',
+            message: '修改成功!'
           });
           // 路由跳转-返回列表页面
           this.$router.push({path: '/teacher/table'})

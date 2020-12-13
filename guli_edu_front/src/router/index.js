@@ -73,6 +73,13 @@ export const constantRoutes = [
         name: '添加讲师',
         component: () => import('@/views/teacher/save'),
         meta: {title: '添加讲师', icon: 'tree'}
+      },
+      {
+        path: 'edit/:id', // :占位符 在路由上传递参数
+        name: '编辑讲师',
+        component: () => import('@/views/teacher/save'),
+        meta: {title: '编辑讲师', icon: 'tree'},
+        hidden: true  // 隐藏路由
       }
     ]
   },

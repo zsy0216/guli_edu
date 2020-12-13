@@ -19,12 +19,29 @@ export default {
     })
   },
 
-  // 2. add讲师
+  // 3. add讲师
   addTeacher(teacher) {
     return request({
       url: `/edu/teachers/`,
       method: 'post',
       data: teacher // post json
+    })
+  },
+
+  // 4. 查询讲师 by id
+  getTeacher(id) {
+    return request({
+      url: `/edu/teachers/${id}`,
+      method: 'get'
+    })
+  },
+
+  // 4. 修改讲师
+  updateTeacher(teacher) {
+    return request({
+      url: `/edu/teachers/`,
+      method: 'put',
+      data: teacher  // json
     })
   }
 }
