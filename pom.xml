@@ -5,7 +5,6 @@
     <modules>
         <module>guli_service</module>
         <module>guli_common</module>
-        <module>common_utils</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
