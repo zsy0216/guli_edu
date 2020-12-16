@@ -80,7 +80,48 @@ public class GuliException extends RuntimeException {
 ```
 
 ### Vue 
+#### 指令：
 - v-bind 单向绑定可以简写为 `:`;
 - v-on 事件绑定可以简写为 `@`;
 
 - v-model 数据双向绑定;
+
+### Nginx
+反向代理服务器
+
+#### 作用
+- 请求转发
+- 负载均衡
+- 动静分离
+
+#### 使用
+http://nginx.org/en/download.html
+这里使用的是 Windows 版本，启动使用 CMD (任务管理器会有两个进程)
+需要注意的是，关闭 CMD 并不会停止 Nginx，需要使用以下命令操作
+```shell
+# 停止
+nginx.exe -s stop
+# 启动
+nginx.exe
+```
+
+#### 配置Nginx 实现请求转发
+找到配置文件 `/nginx-1.18.0/conf/nginx.conf`
+```conf
+http {
+    ...
+    server {
+        listen       9001; # 端口号
+        server_name  localhost; # 主机ip
+        
+        location ~ /edu/service/ { # 匹配路径 ~ 使用正则
+            proxy_pass http://localhost:8001; # 转发到的路径
+        }
+        location ~ /edu/oss/ {
+            proxy_pass http://localhost:8002;
+        }
+        ...
+    }
+    ...
+}
+```
