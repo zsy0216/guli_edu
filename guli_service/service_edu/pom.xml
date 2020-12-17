@@ -11,5 +11,15 @@
 
     <artifactId>service_edu</artifactId>
 
-
+    <dependencies>
+        <!--
+        https://mvnrepository.com/artifact/com.alibaba/easyexcel
+        还需要 poi 已经在父工程引入
+        -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+    </dependencies>
 </project>
