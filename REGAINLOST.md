@@ -107,7 +107,7 @@ nginx.exe
 
 #### 配置Nginx 实现请求转发
 找到配置文件 `/nginx-1.18.0/conf/nginx.conf`
-```conf
+```shell
 http {
     ...
     server {

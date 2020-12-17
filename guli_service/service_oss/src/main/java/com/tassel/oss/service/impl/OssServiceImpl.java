@@ -17,6 +17,7 @@ import java.util.UUID;
  */
 @Service
 public class OssServiceImpl implements OssService {
+
     @Override
     public String uploadAvatar(MultipartFile file) {
         // 工具类获取值

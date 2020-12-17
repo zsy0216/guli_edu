@@ -25,7 +25,32 @@
       <el-form-item label="讲师简介">
         <el-input v-model="teacher.intro" :rows="10" type="textarea"/>
       </el-form-item>
-      <!-- 讲师头像：TODO -->
+
+      <!-- 讲师头像 -->
+      <el-form-item label="讲师头像">
+        <!-- 头衔缩略图 -->
+        <pan-thumb :image="teacher.avatar"/>
+        <!-- 文件上传按钮 -->
+        <el-button type="primary" icon="el-icon-upload"
+                   @click="imagecropperShow=true">更换头像
+        </el-button>
+        <!--
+        v-show：是否显示上传组件
+        :key：类似于id，如果一个页面多个图片上传控件，可以做区分
+        :url：后台上传的url地址
+        @close：关闭上传组件
+        @crop-upload-success：上传成功后的回调 -->
+        <image-cropper
+          v-show="imagecropperShow"
+          :width="300"
+          :height="300"
+          :key="imagecropperKey"
+          :url="BASE_API+'/edu/oss/avatar'"
+          field="file"
+          @close="close"
+          @crop-upload-success="cropSuccess"/>
+      </el-form-item>
+
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary"
                    @click="saveOrUpdate">保存
@@ -35,9 +60,12 @@
   </div>
 </template>
 <script>
-import teacher from '@/api/teacher/index'
+import teacher from '@/api/teacher/index';
+import ImageCropper from '@/components/ImageCropper';
+import PanThumb from '@/components/PanThumb';
 
 export default {
+  components: {ImageCropper, PanThumb},
   data() {
     return {
       teacher: {
@@ -48,7 +76,10 @@ export default {
         intro: '',
         avatar: ''
       },
-      saveBtnDisabled: false
+      saveBtnDisabled: false, // 保存按钮是否禁用
+      imagecropperShow: false, // 上传弹框组件是否显示
+      imagecropperKey: 0, // 上传组件 key 值
+      BASE_API: process.env.VUE_APP_BASE_API // 获取 .env.development 请求地址
     }
   },
   created() {
@@ -59,6 +90,23 @@ export default {
     }
   },
   methods: {
+    // 关闭上传弹框方法
+    close() {
+      this.imagecropperShow = false;
+      // 上传组件初始化
+      this.imagecropperKey = this.imagecropperKey + 1;
+    },
+    // 上传成功方法
+    cropSuccess(data) {
+      // 上传成功接口返回图片地址
+      this.imagecropperShow = false;
+      // 上传组件初始化
+      this.imagecropperKey = this.imagecropperKey + 1;
+      // this.teacher.avatar = data.url;
+      // 这里模拟上传
+      this.teacher.avatar = "https://tassel-edu.oss-cn-shenzhen.aliyuncs.com/2020/12/17/ava2.png";
+    },
+
     getInfo(id) {
       teacher.getTeacher(id)
         .then(response => {
