@@ -73,7 +73,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         // 要生成的数据库表
-        strategy.setInclude("edu_teacher");
+        strategy.setInclude("edu_subject");
         // 数据库表映射到实体的命名策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
         // 生成实体时去掉表前缀
