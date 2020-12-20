@@ -62,6 +62,9 @@ export default {
         type: 'success',
         message: '添加成功'
       });
+
+      // 跳转到树形课程分类列表
+      this.$router.push({path: '/subject/list'});
     },
     // 上传失败
     fileUploadError() {
