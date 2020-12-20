@@ -1,16 +1,15 @@
 package com.tassel.edu.controller;
 
 
+import com.tassel.edu.entity.tree.OneSubject;
 import com.tassel.edu.service.SubjectService;
 import com.tassel.utils.R;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -40,5 +39,14 @@ public class SubjectController {
         return R.ok();
     }
 
+    /**
+     * 课程分类列表-树形结构
+     * @return
+     */
+    @GetMapping("subjects")
+    public R getTreeSubjects() {
+        List<OneSubject> subjects = subjectService.getTreeSubjects();
+        return R.ok().data("subjects", subjects);
+    }
 }
 
