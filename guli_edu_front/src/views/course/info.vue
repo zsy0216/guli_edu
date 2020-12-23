@@ -10,7 +10,23 @@
       <el-form-item label="课程标题">
         <el-input v-model="courseInfo.title" placeholder=" 示例：机器学习项目课：从基础到搭建项目视频课程。专业名称注意大小写"></el-input>
       </el-form-item>
-      <!-- 所属分类 TODO -->
+      <!-- 所属分类 -->
+      <el-form-item label="课程分类">
+        <el-select v-model="courseInfo.subjectParentId" placeholder="一级分类" @change="subjectLevelOneChanged">
+          <el-option v-for="subject in subjectOneList"
+                     :key="subject.id"
+                     :label="subject.title"
+                     :value="subject.id"/>
+        </el-select>
+
+        <!-- 二级分类 -->
+        <el-select v-model="courseInfo.subjectId" placeholder="二级分类">
+          <el-option v-for="subject in subjectTwoList"
+                     :key="subject.value"
+                     :label="subject.title"
+                     :value="subject.id"/>
+        </el-select>
+      </el-form-item>
 
       <!-- 课程讲师 -->
       <el-form-item label="课程讲师">
@@ -41,6 +57,7 @@
 </template>
 <script>
 import course from '@/api/course/index';
+import subject from '@/api/subject/index';
 
 export default {
   data() {
@@ -48,20 +65,42 @@ export default {
       saveBtnDisabled: false,
       courseInfo: {
         title: '',
-        subjectId: '',
+        subjectId: '',       // 二级分类
+        subjectParentId: '', // 一级分类
         teacherId: '',
         lessonNum: 0,
         description: '',
         cover: '',
         price: 0
       },
-      teacherList: []
+      teacherList: [],
+      subjectOneList: [], //一级分类
+      subjectTwoList: [] //二级分类
     }
   },
   created() {
     this.getTeacherList();
+    this.getOneSubjects();
   },
   methods: {
+    // 点击一级分类触发change 获得二级分类
+    subjectLevelOneChanged(oneSubjectId) {
+      for (let i = 0; i < this.subjectOneList.length; i++) {
+        let oneSubject = this.subjectOneList[i];
+        if (oneSubjectId === oneSubject.id) {
+          this.subjectTwoList = oneSubject.children;
+        }
+      }
+    },
+
+    // 查询所有一级分类
+    getOneSubjects() {
+      subject.getTreeSubjects()
+        .then(response => {
+          this.subjectOneList = response.data.subjects;
+        })
+    },
+
     // 查询所有讲师-下拉框
     getTeacherList() {
       course.getTeacherList()
