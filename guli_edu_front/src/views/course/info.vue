@@ -89,6 +89,7 @@ export default {
         let oneSubject = this.subjectOneList[i];
         if (oneSubjectId === oneSubject.id) {
           this.subjectTwoList = oneSubject.children;
+          this.courseInfo.subjectId = '';
         }
       }
     },
