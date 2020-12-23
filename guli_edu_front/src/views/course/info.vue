@@ -54,12 +54,22 @@ export default {
         description: '',
         cover: '',
         price: 0
-      }
+      },
+      teacherList: []
     }
   },
   created() {
+    this.getTeacherList();
   },
   methods: {
+    // 查询所有讲师-下拉框
+    getTeacherList() {
+      course.getTeacherList()
+        .then(response => {
+          this.teacherList = response.data.items;
+        })
+    },
+
     saveOrUpdate() {
       course.addCourseInfo(this.courseInfo)
         .then(response => {

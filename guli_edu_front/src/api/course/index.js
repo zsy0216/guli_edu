@@ -8,5 +8,13 @@ export default {
       method: 'post',
       data: courseInfo
     });
+  },
+
+  // 查询所有讲师
+  getTeacherList() {
+    return request({
+      url: `/edu/service/teachers`,
+      method: 'get'
+    });
   }
 }
