@@ -107,6 +107,49 @@ export const constantRoutes = [
   },
 
   {
+    path: '/course',
+    component: Layout,
+    redirect: '/course/list',
+    name: '课程管理',
+    meta: {title: '课程管理', icon: 'el-icon-s-help'},
+    children: [
+      {
+        path: 'list',
+        name: '课程列表',
+        component: () => import('@/views/course/list'),
+        meta: {title: '课程列表', icon: 'table'}
+      },
+      {
+        path: 'info',
+        name: '课程发布',
+        component: () => import('@/views/course/info'),
+        meta: {title: '课程发布', icon: 'tree'}
+      },
+      {
+        path: 'info/:id',
+        name: 'EduCourseInfoEdit',
+        component: () => import('@/views/course/info'),
+        meta: {title: '编辑课程基本信息', noCache: true},
+        hidden: true // 隐藏路由 实现页面跳转
+      },
+      {
+        path: 'chapter/:id',
+        name: 'EduCourseChapterEdit',
+        component: () => import('@/views/course/chapter'),
+        meta: {title: '编辑课程大纲', noCache: true},
+        hidden: true
+      },
+      {
+        path: 'publish/:id',
+        name: 'EduCoursePublishEdit',
+        component: () => import('@/views/course/publish'),
+        meta: {title: '发布课程', noCache: true},
+        hidden: true
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

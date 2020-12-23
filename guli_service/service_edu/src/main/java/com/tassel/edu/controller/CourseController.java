@@ -26,8 +26,8 @@ public class CourseController {
 
     @PostMapping("/courses")
     public R saveCourseInfo(@RequestBody CourseInfoVo courseInfo) {
-        courseService.saveCourseInfo(courseInfo);
-        return R.ok();
+        String id = courseService.saveCourseInfo(courseInfo);
+        return R.ok().data("courseId", id);
     }
 
 }
