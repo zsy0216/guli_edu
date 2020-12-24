@@ -1,6 +1,7 @@
 <template>
   <div class="upload-container">
-    <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary" @click=" dialogVisible=true">上传图片
+    <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary"
+               @click=" dialogVisible=true">上传图片
     </el-button>
     <el-dialog :visible.sync="dialogVisible">
       <el-upload
@@ -83,8 +84,8 @@ export default {
       return new Promise((resolve, reject) => {
         const img = new Image()
         img.src = _URL.createObjectURL(file)
-        img.onload = function() {
-          _self.listObj[fileName] = { hasSuccess: false, uid: file.uid, width: this.width, height: this.height }
+        img.onload = function () {
+          _self.listObj[fileName] = {hasSuccess: false, uid: file.uid, width: this.width, height: this.height}
         }
         resolve(true)
       })
@@ -96,7 +97,8 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .editor-slide-upload {
   margin-bottom: 20px;
-  /deep/ .el-upload--picture-card {
+
+  /*deep*/ .el-upload--picture-card {
     width: 100%;
   }
 }
