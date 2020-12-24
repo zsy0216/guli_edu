@@ -50,6 +50,6 @@ public class OssController {
      */
     public String fakeUpload(MultipartFile file) {
         log.info("模拟上传，需要上传请修改相关配置");
-        return "https://tassel-edu.oss-cn-shenzhen.aliyuncs.com/2020/12/17/ava2.png";
+        return "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif";
     }
 }
