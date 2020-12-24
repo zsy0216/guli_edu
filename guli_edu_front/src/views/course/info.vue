@@ -45,7 +45,18 @@
       <el-form-item label="课程简介">
         <el-input v-model="courseInfo.description" placeholder="请输入课程简介"></el-input>
       </el-form-item>
-      <!-- 课程封面 TODO -->
+
+      <!-- 课程封面-->
+      <el-form-item label="课程封面">
+        <el-upload :show-file-list="false"
+                   :on-success="handleAvatarSuccess"
+                   :before-upload="beforeAvatarUpload"
+                   :action="BASE_API+'/edu/oss/avatar'"
+                   class="avatar-uploader">
+          <img :src="courseInfo.cover" height="150px">
+        </el-upload>
+      </el-form-item>
+
       <el-form-item label="课程价格">
         <el-input-number :min="0" v-model="courseInfo.price" controls-position="right" placeholder=""/>
       </el-form-item>
@@ -70,12 +81,13 @@ export default {
         teacherId: '',
         lessonNum: 0,
         description: '',
-        cover: '',
+        cover: 'course-cover.jpg',
         price: 0
       },
       teacherList: [],
       subjectOneList: [], //一级分类
-      subjectTwoList: [] //二级分类
+      subjectTwoList: [], //二级分类
+      BASE_API: process.env.VUE_APP_BASE_API
     }
   },
   created() {
@@ -83,7 +95,24 @@ export default {
     this.getOneSubjects();
   },
   methods: {
-    // 点击一级分类触发change 获得二级分类
+    // 上传封面成功调用
+    handleAvatarSuccess(res, file) {
+      this.courseInfo.cover = res.data.url;
+    },
+    // 上传封面之前调用-限制文件类型或文件大小
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
+    },
+
+    // 点击一级分类触发change 获得二级分类,会自动将id作为参数
     subjectLevelOneChanged(oneSubjectId) {
       for (let i = 0; i < this.subjectOneList.length; i++) {
         let oneSubject = this.subjectOneList[i];

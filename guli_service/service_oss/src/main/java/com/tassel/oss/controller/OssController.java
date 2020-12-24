@@ -31,7 +31,7 @@ public class OssController {
         // 出于安全考虑，删除 oss key 模拟上传
         String url = fakeUpload(file);
         /*
-        出于安全问题，这里停止访问 oss 上传文件，仅适用以下两张图片作为上传示例
+        出于安全问题，这里停止访问 oss 上传文件，使用已有的文件作为上传示例
         https://tassel-edu.oss-cn-shenzhen.aliyuncs.com/2020/12/17/ava2.png
         https://tassel-edu.oss-cn-shenzhen.aliyuncs.com/2020/12/16/ava1.jpg
          */
