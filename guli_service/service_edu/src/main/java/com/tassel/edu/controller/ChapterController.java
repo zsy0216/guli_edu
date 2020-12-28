@@ -1,9 +1,13 @@
 package com.tassel.edu.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.tassel.edu.entity.chapter.ChapterVo;
+import com.tassel.edu.service.ChapterService;
+import com.tassel.utils.R;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -13,9 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ZSY
  * @since 2020-12-22
  */
+@CrossOrigin
 @RestController
-@RequestMapping("/edu/chapter")
+@RequestMapping("/edu/service")
 public class ChapterController {
+
+    @Resource
+    ChapterService chapterService;
+
+    @GetMapping("/chapters/{courseId}")
+    public R listChapterVideo(@PathVariable String courseId) {
+        List<ChapterVo> list = chapterService.getChapterVideoByCourseId(courseId);
+        return R.ok().data("allChapterVideo", list);
+    }
 
 }
 
