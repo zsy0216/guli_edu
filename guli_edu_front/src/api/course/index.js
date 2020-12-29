@@ -16,5 +16,21 @@ export default {
       url: `/edu/service/teachers`,
       method: 'get'
     });
+  },
+  // 根据课程id查询课程基本信息
+  getCourseInfo(id) {
+    return request({
+      url: `/edu/service/courses/${id}`,
+      method: 'get'
+    });
+  },
+
+  // 修改课程信息
+  updateCourseInfo(courseInfo) {
+    return request({
+      url: `/edu/service/courses`,
+      method: 'put',
+      data: courseInfo
+    });
   }
 }

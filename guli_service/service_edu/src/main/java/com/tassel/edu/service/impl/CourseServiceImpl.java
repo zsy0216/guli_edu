@@ -77,7 +77,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         CourseDescription description = new CourseDescription();
         BeanUtils.copyProperties(courseInfoVo, description);
         boolean flag = courseDescriptionService.updateById(description);
-        if (flag) {
+        if (!flag) {
             throw new GuliException(20001, "修改课程描述信息失败");
         }
     }

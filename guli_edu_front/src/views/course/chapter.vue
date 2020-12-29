@@ -33,15 +33,16 @@ export default {
   data() {
     return {
       saveBtnDisabled: false, // 保存按钮是否禁用
-      chapterVideoList: []
+      chapterVideoList: [],
+      courseId: ''
     }
   },
   created() {
     // 获取路由中的id
     if (this.$route.params && this.$route.params.id) {
-      const courseId = this.$route.params.id;
-      this.getChapterVideoList(courseId);
+      this.courseId = this.$route.params.id;
     }
+    this.getChapterVideoList(this.courseId);
   },
   methods: {
     getChapterVideoList(id) {
@@ -52,12 +53,11 @@ export default {
     },
 
     previous() {
-      this.$router.push({path: '/course/info/1'});
+      this.$router.push({path: '/course/info/' + this.courseId});
 
     },
     next() {
-      this.$router.push({path: '/course/publish/1'});
-
+      this.$router.push({path: '/course/publish/' + this.courseId});
     }
   }
 }
